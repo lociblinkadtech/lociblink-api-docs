@@ -13,17 +13,13 @@ security:
   - bearerAuth: []
 
 tags:
-
-  - name: WhatsApp - Overview
-    description: WhatsApp API overview
-
-  - name: WhatsApp - Business
+  - name: Business
     description: Business information and configuration
 
-  - name: WhatsApp - Templates
+  - name: Templates
     description: WhatsApp message templates
 
-  - name: WhatsApp - Messages
+  - name: Messages
     description: Send WhatsApp messages
 
 paths:
@@ -31,7 +27,7 @@ paths:
   /business:
     get:
       tags:
-        - WhatsApp - Business
+        - Business
       summary: Get business details
       operationId: getBusiness
       responses:
@@ -45,7 +41,7 @@ paths:
   /templates:
     get:
       tags:
-        - WhatsApp - Templates
+        - Templates
       summary: Get WhatsApp templates
       operationId: getTemplates
       responses:
@@ -61,9 +57,10 @@ paths:
   /messages:
     post:
       tags:
-        - WhatsApp - Messages
+        - Messages
       summary: Send a WhatsApp message
       operationId: sendMessage
+
       requestBody:
         required: true
         content:
@@ -88,11 +85,9 @@ paths:
         "500":
           description: Internal server error
 
-
 components:
 
   securitySchemes:
-
     bearerAuth:
       type: http
       scheme: bearer
@@ -128,7 +123,6 @@ components:
 
     SendMessageRequest:
       type: object
-
       required:
         - to
         - template
