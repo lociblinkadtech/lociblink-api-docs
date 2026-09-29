@@ -14,13 +14,23 @@ security:
 
 tags:
   - name: WhatsApp
+    x-displayName: WhatsApp
     description: WhatsApp messaging APIs
+  - name: Business
+    x-parent: WhatsApp
+    description: Business information and configuration
+  - name: Templates
+    x-parent: WhatsApp
+    description: WhatsApp message templates
+  - name: Messages
+    x-parent: WhatsApp
+    description: Send WhatsApp messages
 
 paths:
   /business:
     get:
       tags:
-        - WhatsApp
+        - Business
       summary: Get business details
       operationId: getBusiness
       responses:
@@ -34,7 +44,7 @@ paths:
   /templates:
     get:
       tags:
-        - WhatsApp
+        - Templates
       summary: Get WhatsApp templates
       operationId: getTemplates
       responses:
@@ -50,7 +60,7 @@ paths:
   /messages:
     post:
       tags:
-        - WhatsApp
+        - Messages
       summary: Send a WhatsApp message
       operationId: sendMessage
       requestBody:
