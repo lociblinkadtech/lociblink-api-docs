@@ -12,12 +12,26 @@ servers:
 security:
   - bearerAuth: []
 
+tags:
+
+  - name: WhatsApp - Overview
+    description: WhatsApp API overview
+
+  - name: WhatsApp - Business
+    description: Business information and configuration
+
+  - name: WhatsApp - Templates
+    description: WhatsApp message templates
+
+  - name: WhatsApp - Messages
+    description: Send WhatsApp messages
+
 paths:
 
   /business:
     get:
       tags:
-        - Business
+        - WhatsApp - Business
       summary: Get business details
       operationId: getBusiness
       responses:
@@ -31,7 +45,7 @@ paths:
   /templates:
     get:
       tags:
-        - Templates
+        - WhatsApp - Templates
       summary: Get WhatsApp templates
       operationId: getTemplates
       responses:
@@ -47,7 +61,7 @@ paths:
   /messages:
     post:
       tags:
-        - Messages
+        - WhatsApp - Messages
       summary: Send a WhatsApp message
       operationId: sendMessage
       requestBody:
@@ -78,6 +92,7 @@ paths:
 components:
 
   securitySchemes:
+
     bearerAuth:
       type: http
       scheme: bearer
@@ -91,6 +106,7 @@ components:
         id:
           type: string
           example: business_123
+
         name:
           type: string
           example: ABC Salon
@@ -101,19 +117,24 @@ components:
         id:
           type: string
           example: template_123
+
         name:
           type: string
           example: hello_customer
+
         status:
           type: string
           example: APPROVED
 
     SendMessageRequest:
       type: object
+
       required:
         - to
         - template
+
       properties:
+
         to:
           type: string
           description: Recipient WhatsApp number in international format
@@ -135,9 +156,11 @@ components:
     MessageResponse:
       type: object
       properties:
+
         id:
           type: string
           example: msg_123456
+
         status:
           type: string
           example: queued
