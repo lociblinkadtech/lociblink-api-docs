@@ -1,0 +1,119 @@
+openapi: 3.0.3
+
+info:
+  title: LociBlink API
+  description: LociBlink API for WhatsApp messaging and customer engagement
+  version: 1.0.0
+
+servers:
+  - url: https://app.lociblink.com/api
+    description: Production
+
+security:
+  - bearerAuth: []
+
+paths:
+
+  /business:
+    get:
+      tags:
+        - Business
+      summary: Get business details
+      operationId: getBusiness
+      responses:
+        "200":
+          description: Business details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "business_123"
+                  name:
+                    type: string
+                    example: "ABC Salon"
+
+  /templates:
+    get:
+      tags:
+        - Templates
+      summary: Get WhatsApp templates
+      operationId: getTemplates
+      responses:
+        "200":
+          description: Templates retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "template_123"
+                    name:
+                      type: string
+                      example: "hello_customer"
+                    status:
+                      type: string
+                      example: "APPROVED"
+
+  /messages:
+    post:
+      tags:
+        - Messages
+      summary: Send a WhatsApp message
+      operationId: sendMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - to
+                - template
+              properties:
+                to:
+                  type: string
+                  description: Recipient WhatsApp number in international format
+                  example: "919876543210"
+
+                template:
+                  type: string
+                  description: WhatsApp template name
+                  example: "hello_customer"
+
+                parameters:
+                  type: array
+                  description: Template parameters
+                  items:
+                    type: string
+                  example:
+                    - "John"
+
+      responses:
+        "200":
+          description: Message accepted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "msg_123456"
+                  status:
+                    type: string
+                    example: "queued"
+
+components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
