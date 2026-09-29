@@ -1,7 +1,7 @@
 openapi: 3.0.3
 
 info:
-  title: LociBlink API
+  title: LociBlink WhatsApp API
   description: LociBlink API for WhatsApp messaging and customer engagement
   version: 1.0.0
 
@@ -13,21 +13,14 @@ security:
   - bearerAuth: []
 
 tags:
-  - name: Business
-    description: Business information and configuration
-
-  - name: Templates
-    description: WhatsApp message templates
-
-  - name: Messages
-    description: Send WhatsApp messages
+  - name: WhatsApp
+    description: WhatsApp messaging APIs
 
 paths:
-
   /business:
     get:
       tags:
-        - Business
+        - WhatsApp
       summary: Get business details
       operationId: getBusiness
       responses:
@@ -41,7 +34,7 @@ paths:
   /templates:
     get:
       tags:
-        - Templates
+        - WhatsApp
       summary: Get WhatsApp templates
       operationId: getTemplates
       responses:
@@ -57,17 +50,15 @@ paths:
   /messages:
     post:
       tags:
-        - Messages
+        - WhatsApp
       summary: Send a WhatsApp message
       operationId: sendMessage
-
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/SendMessageRequest"
-
       responses:
         "200":
           description: Message accepted successfully
@@ -75,18 +66,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MessageResponse"
-
         "400":
           description: Bad request
-
         "401":
           description: Unauthorized
-
         "500":
           description: Internal server error
 
 components:
-
   securitySchemes:
     bearerAuth:
       type: http
@@ -94,14 +81,12 @@ components:
       bearerFormat: JWT
 
   schemas:
-
     Business:
       type: object
       properties:
         id:
           type: string
           example: business_123
-
         name:
           type: string
           example: ABC Salon
@@ -112,11 +97,9 @@ components:
         id:
           type: string
           example: template_123
-
         name:
           type: string
           example: hello_customer
-
         status:
           type: string
           example: APPROVED
@@ -126,19 +109,15 @@ components:
       required:
         - to
         - template
-
       properties:
-
         to:
           type: string
           description: Recipient WhatsApp number in international format
           example: "919876543210"
-
         template:
           type: string
           description: WhatsApp template name
           example: hello_customer
-
         parameters:
           type: array
           description: Template parameters
@@ -150,11 +129,9 @@ components:
     MessageResponse:
       type: object
       properties:
-
         id:
           type: string
           example: msg_123456
-
         status:
           type: string
           example: queued
