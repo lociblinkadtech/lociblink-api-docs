@@ -18,16 +18,12 @@ security:
 tags:
   - name: WhatsApp
     x-displayName: WhatsApp
-    description: WhatsApp messaging APIs
   - name: Business
     x-parent: WhatsApp
-    description: Business information and configuration
   - name: Templates
     x-parent: WhatsApp
-    description: WhatsApp message templates
   - name: Messages
     x-parent: WhatsApp
-    description: Send WhatsApp messages
 
 paths:
   /business:
@@ -50,6 +46,38 @@ paths:
                   name:
                     type: string
                     example: ABC Salon
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+                  message:
+                    type: string
+                    example: Invalid or missing API key
+                  code:
+                    type: integer
+                    example: 401
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+                  message:
+                    type: string
+                    example: An unexpected error occurred while processing the request
+                  code:
+                    type: integer
+                    example: 500
 
   /templates:
     get:
@@ -82,6 +110,38 @@ paths:
                     status:
                       type: string
                       example: APPROVED
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+                  message:
+                    type: string
+                    example: Invalid or missing API key
+                  code:
+                    type: integer
+                    example: 401
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+                  message:
+                    type: string
+                    example: An unexpected error occurred while processing the request
+                  code:
+                    type: integer
+                    example: 500
 
     post:
       tags:
@@ -145,6 +205,52 @@ paths:
                     example: APPROVED
         "400":
           description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Bad Request
+                  message:
+                    type: string
+                    example: Invalid request payload or missing required parameters
+                  code:
+                    type: integer
+                    example: 400
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+                  message:
+                    type: string
+                    example: Invalid or missing API key
+                  code:
+                    type: integer
+                    example: 401
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+                  message:
+                    type: string
+                    example: An unexpected error occurred while processing the request
+                  code:
+                    type: integer
+                    example: 500
 
   /templates/{id}:
     get:
@@ -183,8 +289,54 @@ paths:
                   status:
                     type: string
                     example: APPROVED
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+                  message:
+                    type: string
+                    example: Invalid or missing API key
+                  code:
+                    type: integer
+                    example: 401
         "404":
           description: Template not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Not Found
+                  message:
+                    type: string
+                    example: Template with specified ID was not found
+                  code:
+                    type: integer
+                    example: 404
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+                  message:
+                    type: string
+                    example: An unexpected error occurred while processing the request
+                  code:
+                    type: integer
+                    example: 500
 
   /messages/transactional:
     post:
@@ -304,10 +456,52 @@ paths:
                     example: queued
         "400":
           description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Bad Request
+                  message:
+                    type: string
+                    example: Invalid request payload or missing required parameters
+                  code:
+                    type: integer
+                    example: 400
         "401":
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+                  message:
+                    type: string
+                    example: Invalid or missing API key
+                  code:
+                    type: integer
+                    example: 401
         "500":
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+                  message:
+                    type: string
+                    example: An unexpected error occurred while processing the request
+                  code:
+                    type: integer
+                    example: 500
 
   /messages/promotional:
     post:
@@ -427,10 +621,52 @@ paths:
                     example: queued
         "400":
           description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Bad Request
+                  message:
+                    type: string
+                    example: Invalid request payload or missing required parameters
+                  code:
+                    type: integer
+                    example: 400
         "401":
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+                  message:
+                    type: string
+                    example: Invalid or missing API key
+                  code:
+                    type: integer
+                    example: 401
         "500":
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+                  message:
+                    type: string
+                    example: An unexpected error occurred while processing the request
+                  code:
+                    type: integer
+                    example: 500
 
   /messages/authentication:
     post:
@@ -548,10 +784,52 @@ paths:
                     example: queued
         "400":
           description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Bad Request
+                  message:
+                    type: string
+                    example: Invalid request payload or missing required parameters
+                  code:
+                    type: integer
+                    example: 400
         "401":
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Unauthorized
+                  message:
+                    type: string
+                    example: Invalid or missing API key
+                  code:
+                    type: integer
+                    example: 401
         "500":
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+                  message:
+                    type: string
+                    example: An unexpected error occurred while processing the request
+                  code:
+                    type: integer
+                    example: 500
 
 components:
   securitySchemes:
