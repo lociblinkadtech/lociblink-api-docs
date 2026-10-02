@@ -40,12 +40,50 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
                     type: string
-                    example: business_123
-                  name:
-                    type: string
-                    example: ABC Salon
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        businessName:
+                          type: string
+                          example: "Lociblink Private Limited"
+                        displayPhoneNumber:
+                          type: string
+                          example: "+91 9876543210"
+                        profilePictureUrl:
+                          type: string
+                          example: "/integrations/api/whatsapp/profile-picture/sample_profile_pic"
+                        status:
+                          type: string
+                          example: "ACTIVE"
+                        errorMessage:
+                          type: string
+                          nullable: true
+                          example: null
+                        createdAt:
+                          type: string
+                          example: "2026-07-26T00:04:38"
+                        updatedAt:
+                          type: string
+                          example: "2026-09-18T14:36:32.137705"
+              example:
+                success: true
+                message: "Success"
+                data:
+                  - businessName: "Lociblink Private Limited"
+                    displayPhoneNumber: "+91 9876543210"
+                    profilePictureUrl: "/integrations/api/whatsapp/profile-picture/sample_profile_pic"
+                    status: "ACTIVE"
+                    errorMessage: null
+                    createdAt: "2026-07-26T00:04:38"
+                    updatedAt: "2026-09-18T14:36:32.137705"
         "401":
           description: Unauthorized
           content:
@@ -91,25 +129,96 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      example: template_123
-                    name:
-                      type: string
-                      example: hello_customer
-                    category:
-                      type: string
-                      example: UTILITY
-                    language:
-                      type: string
-                      example: en_US
-                    status:
-                      type: string
-                      example: APPROVED
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        templateId:
+                          type: string
+                          example: "1000000000000001"
+                        templateName:
+                          type: string
+                          example: welcome_user
+                        category:
+                          type: string
+                          enum:
+                            - UTILITY
+                            - MARKETING
+                            - AUTHENTICATION
+                          example: UTILITY
+                        languageCode:
+                          type: string
+                          example: en_US
+                        phoneNumber:
+                          type: string
+                          example: "+91 9876543210"
+                        status:
+                          type: integer
+                          description: Status code of the template (e.g. 2 for APPROVED)
+                          example: 2
+                        deleted:
+                          type: boolean
+                          example: false
+                        mediaUrl:
+                          type: string
+                          nullable: true
+                          example: null
+                        message:
+                          type: string
+                          description: JSON stringified message structure containing components, body text, and parameters
+                          example: '{"type":"BODY","text":"Welcome to {{1}}. Your account setup is complete. Thank you for choosing us.","example":{"body_text":[["John"]]}}'
+                        createdAt:
+                          type: string
+                          example: "2026-08-12 10:00:00.000000"
+                        updateDate:
+                          type: string
+                          example: "2026-08-12 10:00:00.000000"
+              example:
+                success: true
+                message: "Success"
+                data:
+                  - category: "UTILITY"
+                    createdAt: "2026-08-12 10:00:00.000000"
+                    deleted: false
+                    languageCode: "en_US"
+                    mediaUrl: null
+                    message: '{"type":"BODY","text":"Welcome to {{1}}. Your account setup is complete. Thank you for choosing us.","example":{"body_text":[["John"]]}}'
+                    phoneNumber: "+91 9876543210"
+                    status: 2
+                    templateId: "1000000000000001"
+                    templateName: "welcome_user"
+                    updateDate: "2026-08-12 10:00:00.000000"
+                  - category: "MARKETING"
+                    createdAt: "2026-09-10 10:00:00"
+                    deleted: false
+                    languageCode: "en_US"
+                    mediaUrl: null
+                    message: '{"type":"body","text":"Special festive offer for {{1}}! Get 25% off on your next purchase with code {{2}}.","example":{"body_text":[["John","FESTIVE25"]]}},{"type":"buttons","buttons":[{"type":"url","text":"View Offers","url":"https://www.example.com/offers"}]}'
+                    phoneNumber: "+91 9876543210"
+                    status: 2
+                    templateId: "1000000000000002"
+                    templateName: "festive_sale_offer"
+                    updateDate: "2026-09-10 10:00:00"
+                  - category: "AUTHENTICATION"
+                    createdAt: "2026-09-11 10:00:00"
+                    deleted: false
+                    languageCode: "en_US"
+                    mediaUrl: null
+                    message: '{"type":"body","add_security_recommendation":true},{"type":"buttons","buttons":[{"type":"otp","text":"Copy Code","otp_type":"COPY_CODE"}]}'
+                    phoneNumber: "+91 9876543210"
+                    status: 2
+                    templateId: "1000000000000003"
+                    templateName: "otp_verification"
+                    updateDate: "2026-09-11 10:00:00"
         "401":
           description: Unauthorized
           content:
@@ -448,12 +557,51 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
                     type: string
-                    example: msg_123456
-                  status:
-                    type: string
-                    example: queued
+                    example: Message sent successfully
+                  data:
+                    type: object
+                    properties:
+                      messaging_product:
+                        type: string
+                        example: whatsapp
+                      contacts:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            input:
+                              type: string
+                              example: "919876543210"
+                            wa_id:
+                              type: string
+                              example: "919876543210"
+                      messages:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: "wamid.HBgMOTE5ODc2NTQzMjEwFQIAERgSQ0E1MzdGQ0FFRkU4MDgzODNEAA=="
+                            message_status:
+                              type: string
+                              example: accepted
+              example:
+                success: true
+                message: "Message sent successfully"
+                data:
+                  messaging_product: "whatsapp"
+                  contacts:
+                    - input: "919876543210"
+                      wa_id: "919876543210"
+                  messages:
+                    - id: "wamid.HBgMOTE5ODc2NTQzMjEwFQIAERgSQ0E1MzdGQ0FFRkU4MDgzODNEAA=="
+                      message_status: "accepted"
         "400":
           description: Bad request
           content:
@@ -613,12 +761,51 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
                     type: string
-                    example: msg_123456
-                  status:
-                    type: string
-                    example: queued
+                    example: Message sent successfully
+                  data:
+                    type: object
+                    properties:
+                      messaging_product:
+                        type: string
+                        example: whatsapp
+                      contacts:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            input:
+                              type: string
+                              example: "919876543210"
+                            wa_id:
+                              type: string
+                              example: "919876543210"
+                      messages:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: "wamid.HBgMOTE5ODc2NTQzMjEwFQIAERgSQ0E1MzdGQ0FFRkU4MDgzODNEAA=="
+                            message_status:
+                              type: string
+                              example: accepted
+              example:
+                success: true
+                message: "Message sent successfully"
+                data:
+                  messaging_product: "whatsapp"
+                  contacts:
+                    - input: "919876543210"
+                      wa_id: "919876543210"
+                  messages:
+                    - id: "wamid.HBgMOTE5ODc2NTQzMjEwFQIAERgSQ0E1MzdGQ0FFRkU4MDgzODNEAA=="
+                      message_status: "accepted"
         "400":
           description: Bad request
           content:
@@ -776,12 +963,51 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
                     type: string
-                    example: msg_123456
-                  status:
-                    type: string
-                    example: queued
+                    example: Message sent successfully
+                  data:
+                    type: object
+                    properties:
+                      messaging_product:
+                        type: string
+                        example: whatsapp
+                      contacts:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            input:
+                              type: string
+                              example: "919876543210"
+                            wa_id:
+                              type: string
+                              example: "919876543210"
+                      messages:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: "wamid.HBgMOTE5ODc2NTQzMjEwFQIAERgSQ0E1MzdGQ0FFRkU4MDgzODNEAA=="
+                            message_status:
+                              type: string
+                              example: accepted
+              example:
+                success: true
+                message: "Message sent successfully"
+                data:
+                  messaging_product: "whatsapp"
+                  contacts:
+                    - input: "919876543210"
+                      wa_id: "919876543210"
+                  messages:
+                    - id: "wamid.HBgMOTE5ODc2NTQzMjEwFQIAERgSQ0E1MzdGQ0FFRkU4MDgzODNEAA=="
+                      message_status: "accepted"
         "400":
           description: Bad request
           content:
